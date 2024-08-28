@@ -37,6 +37,8 @@ import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.TreeUI;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -66,10 +68,18 @@ public class TestAlphaStone {
     assertThat(player, is(Player.FINDUS));
   }
 
+  // Player change to Peddersen when Findus ends turn
+  @Test
+  public void ShouldChangePlayerEachTurn() {
+    assertThat(game.getPlayerInTurn(), is(Player.FINDUS));
+    game.endTurn();
+    assertThat(game.getPlayerInTurn(), is(Player.PEDDERSEN));
+  }
+
+
 
   // Example of a later, more complex, test case:
   // Card handling
-
   // The HotStone specs are quite insisting on how
   // the cards, drawn from the deck, are organized
   // in the hand. So when drawing the top three cards

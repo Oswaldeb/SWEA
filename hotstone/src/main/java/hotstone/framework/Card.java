@@ -32,7 +32,6 @@ public interface Card {
    * @return the name
    */
   String getName();
-
   /** Get the cost of the card (in mana)
    * for playing the card from the hand to the
    * field.

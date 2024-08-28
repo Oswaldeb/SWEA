@@ -67,6 +67,13 @@ public class TestAlphaStone {
   }
 
 
+  @Test
+  public void ShouldChangePlayerAfterTurn() {
+    game.endTurn();
+    Player player = game.getPlayerInTurn();
+    assertThat(player, is(Player.PEDDERSEN));
+  }
+
   // Example of a later, more complex, test case:
   // Card handling
 

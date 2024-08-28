@@ -41,10 +41,17 @@ import hotstone.framework.*;
  * why it is not called 'AlphaGame'.
  */
 public class StandardHotStoneGame implements Game {
+  private int Turn = 1;
+
   @Override
   public Player getPlayerInTurn() {
-    return Player.FINDUS;
-  } // Fake-it
+    if(Turn % 2 == 0) {
+      return Player.PEDDERSEN;
+    }
+    else {
+      return Player.FINDUS;
+    }
+  } 
 
   @Override
   public Hero getHero(Player who) {
@@ -98,7 +105,11 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public void endTurn() { 
+<<<<<<< HEAD
   
+=======
+    Turn ++;
+>>>>>>> c23ca4055557d28654f4949502cd5b029df4c66e
   }
 
   @Override

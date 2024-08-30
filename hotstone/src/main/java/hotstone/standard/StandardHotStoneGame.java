@@ -17,6 +17,9 @@
 
 package hotstone.standard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hotstone.framework.*;
 
 /** This is the 'temporary test stub' in TDD
@@ -41,15 +44,14 @@ import hotstone.framework.*;
  * why it is not called 'AlphaGame'.
  */
 public class StandardHotStoneGame implements Game {
-  private int Turn = 1;
+  private int Turn = 0;
 
   @Override
   public Player getPlayerInTurn() {
-    if(Turn % 2 == 0) {
-      return Player.PEDDERSEN;
-    }
-    else {
+    if (Turn % 2 == 0){
       return Player.FINDUS;
+    } else {
+      return Player.PEDDERSEN;
     }
   } 
 
@@ -75,8 +77,10 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Card getCardInHand(Player who, int indexInHand) {
-    return null;
-  }
+    if(who == Player.FINDUS){
+
+    }
+}
 
   @Override
   public Iterable<? extends Card> getHand(Player who) {

@@ -68,10 +68,24 @@ public class TestAlphaStone {
 
 
   @Test
-  public void ShouldChangePlayerAfterTurn() {
+  public void ShouldChangePlayerAfter1Turn() {
+    // Given a game
     game.endTurn();
+    // When first turn ends
     Player player = game.getPlayerInTurn();
+    // Then player should be Peddersen
     assertThat(player, is(Player.PEDDERSEN));
+  }
+
+  @Test
+  public void ShouldChangePlayerAfter2Turns() {
+    // Given a game
+    game.endTurn();
+    game.endTurn();
+    // When second turn ends
+    Player player = game.getPlayerInTurn();
+    // Then player should be Findus
+    assertThat(player, is(Player.FINDUS));
   }
 
   // Example of a later, more complex, test case:
@@ -94,11 +108,15 @@ public class TestAlphaStone {
     assertThat(count, is(3));
     // And these are ordered Tres, Dos, Uno in slot 0,1,2
 
-    // When I pick card 0
-    Card card = game.getCardInHand(Player.FINDUS, 0);
-    // Then is it Tres
-    // ENABLE TO START TDD'ing
-    // assertThat(card.getName(), is(GameConstants.TRES_CARD));
+    // When I pick card 0, 1, 2.
+    Card card1 = game.getCardInHand(Player.FINDUS, 0);
+    Card card2 = game.getCardInHand(Player.FINDUS, 1);
+    Card card3 = game.getCardInHand(Player.FINDUS, 2);
+
+    // They should be tres, dos, uno in that order.
+    assertThat(card1.getName(), is(GameConstants.TRES_CARD));
+    assertThat(card2.getName(), is(GameConstants.DOS_CARD));
+    assertThat(card3.getName(), is(GameConstants.UNO_CARD));
   }
 
   /** REMOVE ME. Not a test of HotStone, just an example of the

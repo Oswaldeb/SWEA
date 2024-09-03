@@ -15,27 +15,28 @@ public class StandHero implements Hero {
     }
 
 
-    int getMana(){
-        return 0;
+    public int getMana(){
+        return mana;
+        
     }
 
-    int getHealth(){
-        return 0;
+    public int getHealth(){
+        return health;
     }
 
-    boolean canUsePower(){
+    public boolean canUsePower(){
         return false;
     }
 
-    String getType(){
-        return null;
+    public String getType(){
+        return type;
     }
 
-    Player getOwner(){
-        return null;
+    public Player getOwner(){
+        return player;
     }
 
-    String getEffectDescription(){
+    public String getEffectDescription(){
         return null;
     }
     

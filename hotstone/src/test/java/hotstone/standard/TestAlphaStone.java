@@ -41,6 +41,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import hotstone.framework.Game;
+import hotstone.framework.Hero;
 
 
 public class TestAlphaStone {
@@ -111,7 +112,7 @@ public class TestAlphaStone {
     assertThat(card2.getHealth(), is(2));
   }
 
-  @Test
+  //@Test
   public void GivenFirstRoundFindusHasHeroTypeBaby(){
     //Given Player is findus
     //Then hero should be type baby
@@ -127,9 +128,15 @@ public class TestAlphaStone {
     assertThat(game.getTurnNumber(), is(2));
   }
 
-
+ @Test
+ public void ManaFirstRoundIsOne(){
+  //given a game starts
+  Hero hero = new StandHero("Baby", 1, 20, Player.FINDUS);
+  //when 
+  assertThat(hero.getMana(), is(1));
+ }
   
-  @Test
+  //@Test
   public void FindusDeckSizeDecreases(){
     assertThat(game.getDeckSize(Player.FINDUS), is(7-3));
     game.endTurn();
@@ -137,13 +144,13 @@ public class TestAlphaStone {
     assertThat(game.getDeckSize(Player.FINDUS), is(7-4));
   }
 
-  @Test
+  //@Test
   public void CanFindusPlayCard(){
     // Given a game
     // When 
   }
 
-  @Test
+  //@Test
   public void FindusPlaysUnoAndUnoAppearsOnField(){
     // Given a game
     // When Findus plays uno

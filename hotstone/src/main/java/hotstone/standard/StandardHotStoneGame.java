@@ -45,7 +45,7 @@ import hotstone.framework.*;
  * why it is not called 'AlphaGame'.
  */
 public class StandardHotStoneGame implements Game {
-  private int Turn = 0;
+  private static int Turn = 0;
   private int DeckSize = 7;
 
   Card Tres = new StandardCard(GameConstants.TRES_CARD, 3, 3, 3);
@@ -68,7 +68,7 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Hero getHero(Player who) {
-    return Baby.getType();
+    return null;
   }
 
   @Override

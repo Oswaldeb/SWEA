@@ -42,10 +42,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import hotstone.framework.Game;
 
-/** Template for your own ongoing TDD process.
- * Fill it out until you have covered all
- * requirements for the alpha stone game.
- */
+
 public class TestAlphaStone {
   private Game game;
 
@@ -55,8 +52,7 @@ public class TestAlphaStone {
     game = new StandardHotStoneGame();
   }
 
-  // Example of an early, simple test case:
-  // Turn handling
+
   @Test
   public void shouldHaveFindusAsFirstPlayer() {
     // Given a game
@@ -88,19 +84,6 @@ public class TestAlphaStone {
     assertThat(player, is(Player.FINDUS));
   }
 
-  // Example of a later, more complex, test case:
-  // Card handling
-
-  // The HotStone specs are quite insisting on how
-  // the cards, drawn from the deck, are organized
-  // in the hand. So when drawing the top three cards
-  // from the deck (uno, dos, tres) they have to
-  // be organized in the hand as
-  // index 0 = tres; index 1 = dos; index 2 = uno
-  // That is, a newly drawn card is 'at the top'
-  // of the hand - always entered at position 0
-  // and pushing the rest of the cards 1 position
-  // 'down'
   @Test
   public void shouldHaveUnoDosTresCardsInitially() {
     // Given a game, Findus has 3 cards in hand
@@ -119,35 +102,54 @@ public class TestAlphaStone {
     assertThat(card3.getName(), is(GameConstants.UNO_CARD));
   }
 
-  /** REMOVE ME. Not a test of HotStone, just an example of the
-   matchers that the hamcrest library has... */
   @Test
-  public void shouldDefinitelyBeRemoved() {
-    // Matching null and not null values
-    // 'is' require an exact match
-    // Hamcrest uses the 'equals()' method
-    String s = null;
-    assertThat(s, is(nullValue()));
-    s = "Ok";
-    assertThat(s, is(notNullValue()));
-    assertThat(s, is("Ok"));
-
-    // If you only validate substrings, use containsString
-    assertThat("This is a dummy test", containsString("dummy"));
-
-    // You can use is on any type
-    int answerToLifeUniverseAndEverything = 42;
-    assertThat(answerToLifeUniverseAndEverything, is(42));
-
-    // Match contents of Lists
-    List<String> l = new ArrayList<String>();
-    l.add("Bimse");
-    l.add("Bumse");
-    // Note - ordering is ignored when matching using hasItems
-    assertThat(l, hasItems(new String[] {"Bumse","Bimse"}));
-
-    // Matchers may be combined, like is-not
-    assertThat(l.get(0), is(not("Bumse")));
+  public void GivenCardDos(){
+    Card card2 = game.getCardInHand(Player.FINDUS, 1);
+    // check attributes
+    assertThat(card2.getManaCost(), is(2));
+    assertThat(card2.getAttack(), is(2));
+    assertThat(card2.getHealth(), is(2));
   }
 
+  @Test
+  public void GivenFirstRoundFindusHasHeroTypeBaby(){
+    //Given Player is findus
+    //Then hero should be type baby
+    assertThat(game.getHero(Player.FINDUS), is(GameConstants.BABY_HERO_TYPE));
+  
+  }
+  @Test
+  public void TurnNumberWorks(){
+    assertThat(game.getTurnNumber(), is(0));
+    game.endTurn();
+    assertThat(game.getTurnNumber(), is(1));
+    game.endTurn();
+    assertThat(game.getTurnNumber(), is(2));
+  }
+
+
+  
+  @Test
+  public void FindusDeckSizeDecreases(){
+    assertThat(game.getDeckSize(Player.FINDUS), is(7-3));
+    game.endTurn();
+    game.endTurn();
+    assertThat(game.getDeckSize(Player.FINDUS), is(7-4));
+  }
+
+  @Test
+  public void CanFindusPlayCard(){
+    // Given a game
+    // When 
+  }
+
+  @Test
+  public void FindusPlaysUnoAndUnoAppearsOnField(){
+    // Given a game
+    // When Findus plays uno
+    Card card1 = game.getCardInHand(Player.FINDUS, 0);
+    game.playCard(Player.FINDUS, card1, 0);
+    // Then Uno appears on the field at index 0
+    assertThat(game.getCardInField(Player.FINDUS, 0).getName(), is(GameConstants.UNO_CARD));
+  }
 }

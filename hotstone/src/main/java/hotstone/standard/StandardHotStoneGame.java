@@ -18,6 +18,7 @@
 package hotstone.standard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import hotstone.framework.*;
@@ -45,7 +46,17 @@ import hotstone.framework.*;
  */
 public class StandardHotStoneGame implements Game {
   private int Turn = 0;
+  private int DeckSize = 7;
 
+  Card Tres = new StandardCard(GameConstants.TRES_CARD, 3, 3, 3);
+  Card Dos = new StandardCard(GameConstants.DOS_CARD, 2, 2, 2);
+  Card Uno = new StandardCard(GameConstants.UNO_CARD, 1, 1, 1);
+  Hero Baby = new StandHero(GameConstants.BABY_HERO_TYPE, 3, 22, Player.FINDUS);
+
+  // First hand
+  List<Card> hand = Arrays.asList(Tres, Dos, Uno);
+
+  
   @Override
   public Player getPlayerInTurn() {
     if (Turn % 2 == 0){
@@ -57,7 +68,7 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Hero getHero(Player who) {
-    return null;
+    return Baby.getType();
   }
 
   @Override
@@ -67,7 +78,7 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public int getTurnNumber() {
-    return 0;
+    return Turn;
   }
 
   @Override
@@ -77,14 +88,18 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Card getCardInHand(Player who, int indexInHand) {
+    //Given player is Findus
     if(who == Player.FINDUS){
-
+      //Get Card from IndexInHand
+      return hand.get(indexInHand);
+    } else {
+      return null;
     }
 }
 
   @Override
   public Iterable<? extends Card> getHand(Player who) {
-    return null;
+    return hand;
   }
 
   @Override

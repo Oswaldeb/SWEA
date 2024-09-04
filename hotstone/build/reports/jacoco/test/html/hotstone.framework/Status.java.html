@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Status.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hotstone</a> &gt; <a href="index.source.html" class="el_package">hotstone.framework</a> &gt; <span class="el_source">Status.java</span></div><h1>Status.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2022-2024. Henrik BÃ¦rbak Christensen, Aarhus University.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package hotstone.framework;
+
+/** The status enumeration defines the set of outcomes arising from
+ * any mutator call to the Game.  Generally, if a mutation was
+ * executed, then OK is returned, otherwise a more detailed failure
+ * code is returned.
+ */
+
+<span class="nc" id="L26">public enum Status {</span>
+  /** Everything went OK. */
+<span class="nc" id="L28">  OK,</span>
+
+  // === Codes for failure situations
+
+  /** Not enough mana to play card, use power, etc. */
+<span class="nc" id="L33">  NOT_ENOUGH_MANA,</span>
+  /** Trying to attack with a minion that is not active. */
+<span class="nc" id="L35">  ATTACK_NOT_ALLOWED_FOR_NON_ACTIVE_MINION,</span>
+  /** Trying to 'fiddle' with a card or hero owned by opponent. */
+<span class="nc" id="L37">  NOT_OWNER,</span>
+  /** Trying to do an action, but it is not the player's turn. */
+<span class="nc" id="L39">  NOT_PLAYER_IN_TURN,</span>
+  /** Trying to use hero power twice or more in a turn. */
+<span class="nc" id="L41">  POWER_USE_NOT_ALLOWED_TWICE_PR_ROUND,</span>
+  /** Trying to attack your own minion (? should this be allowed). */
+<span class="nc" id="L43">  ATTACK_NOT_ALLOWED_ON_OWN_MINION,</span>
+
+  // The status code below is only relevant if you implement ThetaStone
+
+  /** If attacking hero or non-taunt minion while taunt minion on field. */
+<span class="nc" id="L48">  ATTACK_NOT_ALLOWED_ON_NON_TAUNT_MINION,</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

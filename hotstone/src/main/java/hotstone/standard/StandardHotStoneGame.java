@@ -44,17 +44,26 @@ import hotstone.framework.*;
  * enable a lot of game variants. This is also
  * why it is not called 'AlphaGame'.
  */
+
+
 public class StandardHotStoneGame implements Game {
-  private static int Turn = 0;
+  private int Turn = 0;
   private int DeckSize = 7;
 
   Card Tres = new StandardCard(GameConstants.TRES_CARD, 3, 3, 3);
   Card Dos = new StandardCard(GameConstants.DOS_CARD, 2, 2, 2);
   Card Uno = new StandardCard(GameConstants.UNO_CARD, 1, 1, 1);
-  Hero Baby = new StandHero(GameConstants.BABY_HERO_TYPE, 3, 22, Player.FINDUS);
+  Hero Findus_Baby = new StandHero(GameConstants.BABY_HERO_TYPE, 3, GameConstants.HERO_MAX_HEALTH, Player.FINDUS);
+  Hero Peddersen_Baby = new StandHero(GameConstants.BABY_HERO_TYPE, 3, GameConstants.HERO_MAX_HEALTH, Player.PEDDERSEN);
 
   // First hand
   List<Card> hand = Arrays.asList(Tres, Dos, Uno);
+
+
+  // Findus Field
+  List<Card> Findus_Field = new ArrayList<Card>();
+  // Peddersen Field
+  List<Card> Peddersen_Field = new ArrayList<Card>(); 
 
   
   @Override
@@ -68,7 +77,11 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Hero getHero(Player who) {
-    return null;
+    if (who == Player.FINDUS){
+      return Findus_Baby;
+    } else {
+      return Peddersen_Baby;
+    } 
   }
 
   @Override
@@ -109,17 +122,26 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Card getCardInField(Player who, int indexInField) {
-    return null;
+    //depending on who is the player, get the field
+    List<Card> field = (who == Player.FINDUS) ? Findus_Field : Peddersen_Field;
+    return field.get(indexInField);
   }
 
   @Override
   public Iterable<? extends Card> getField(Player who) {
-    return null;
+    List<Card> field = (who == Player.FINDUS) ? Findus_Field : Peddersen_Field;
+    return field;
   }
 
   @Override
   public int getFieldSize(Player who) {
-    return 0;
+    //Given player is Findus
+    if (who == Player.FINDUS){
+      return Findus_Field.size();
+      // Given player is Peddersen
+    } else if  (who == Player.PEDDERSEN);
+    return Peddersen_Field.size();
+    
   }
 
   @Override
@@ -129,6 +151,10 @@ public class StandardHotStoneGame implements Game {
 
   @Override
   public Status playCard(Player who, Card card, int atIndex) {
+    StandHero hero = (StandHero) getHero(who);
+    hero.ReduceMana(card.getManaCost());
+    Findus_Field.add(card);
+
     return null;
   }
 

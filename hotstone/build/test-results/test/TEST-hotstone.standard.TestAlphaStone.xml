@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hotstone.standard.TestAlphaStone" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-09-04T07:47:38" hostname="JONASPC" time="0.059">
+  <properties/>
+  <testcase name="ManaFirstRoundIs3()" classname="hotstone.standard.TestAlphaStone" time="0.034"/>
+  <testcase name="shouldHaveFindusAsFirstPlayer()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="TestIfGetHeroWorksForPeddersen()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="TestIfGetHeroWorksForFindus()" classname="hotstone.standard.TestAlphaStone" time="0.0"/>
+  <testcase name="CheckCardGetsPlayedToRightIndexOnField()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="ShouldChangePlayerAfter2Turns()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="ShouldNotPlayCardWithInsufficientMana()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="TurnNumberWorks()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="TestGetFieldSizeAfterPlayingCard()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="TestGetFieldSizeBeforePlayingCard()" classname="hotstone.standard.TestAlphaStone" time="0.0"/>
+  <testcase name="ShouldReduceManaWhenPlayingCard()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="shouldHaveUnoDosTresCardsInitially()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="ShouldChangePlayerAfter1Turn()" classname="hotstone.standard.TestAlphaStone" time="0.001"/>
+  <testcase name="GivenCardDos()" classname="hotstone.standard.TestAlphaStone" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

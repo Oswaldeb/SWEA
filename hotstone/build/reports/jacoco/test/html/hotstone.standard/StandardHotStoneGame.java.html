@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StandardHotStoneGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hotstone</a> &gt; <a href="index.source.html" class="el_package">hotstone.standard</a> &gt; <span class="el_source">StandardHotStoneGame.java</span></div><h1>StandardHotStoneGame.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2022-2024. Henrik BÃ¦rbak Christensen, Aarhus University.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package hotstone.standard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import hotstone.framework.*;
+
+/** This is the 'temporary test stub' in TDD
+ * terms: the initial empty but compilable implementation
+ * of the game interface.
+ *
+ * It already includes a bit of FAKE-IT code for the first
+ * test case about hand management and player in turn.
+ *
+ * Start solving the AlphaStone exercise by
+ * following the TDD rhythm: pick a one-step-test
+ * from your test list, quickly add a test,
+ * run it to see it fail, and then modify this
+ * implementing class (and supporting classes)
+ * to make your test case run. Refactor and repeat.
+ *
+ * While this is the implementation of Game for
+ * the AlphaStone game, you will constantly
+ * refactor it over the course of the exercises
+ * to become the 'core implementation' which will
+ * enable a lot of game variants. This is also
+ * why it is not called 'AlphaGame'.
+ */
+
+
+<span class="fc" id="L49">public class StandardHotStoneGame implements Game {</span>
+<span class="fc" id="L50">  private int Turn = 0;</span>
+<span class="fc" id="L51">  private int DeckSize = 7;</span>
+
+<span class="fc" id="L53">  Card Tres = new StandardCard(GameConstants.TRES_CARD, 3, 3, 3);</span>
+<span class="fc" id="L54">  Card Dos = new StandardCard(GameConstants.DOS_CARD, 2, 2, 2);</span>
+<span class="fc" id="L55">  Card Uno = new StandardCard(GameConstants.UNO_CARD, 1, 1, 1);</span>
+<span class="fc" id="L56">  Hero Findus_Baby = new StandHero(GameConstants.BABY_HERO_TYPE, 3, GameConstants.HERO_MAX_HEALTH, Player.FINDUS);</span>
+<span class="fc" id="L57">  Hero Peddersen_Baby = new StandHero(GameConstants.BABY_HERO_TYPE, 3, GameConstants.HERO_MAX_HEALTH, Player.PEDDERSEN);</span>
+
+  // First hand
+<span class="fc" id="L60">  List&lt;Card&gt; hand = Arrays.asList(Tres, Dos, Uno);</span>
+
+
+  // Findus Field
+<span class="fc" id="L64">  List&lt;Card&gt; Findus_Field = new ArrayList&lt;Card&gt;();</span>
+  // Peddersen Field
+<span class="fc" id="L66">  List&lt;Card&gt; Peddersen_Field = new ArrayList&lt;Card&gt;(); </span>
+
+  
+  @Override
+  public Player getPlayerInTurn() {
+<span class="fc bfc" id="L71" title="All 2 branches covered.">    if (Turn % 2 == 0){</span>
+<span class="fc" id="L72">      return Player.FINDUS;</span>
+    } else {
+<span class="fc" id="L74">      return Player.PEDDERSEN;</span>
+    }
+  } 
+
+  @Override
+  public Hero getHero(Player who) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">    if (who == Player.FINDUS){</span>
+<span class="fc" id="L81">      return Findus_Baby;</span>
+    } else {
+<span class="fc" id="L83">      return Peddersen_Baby;</span>
+    } 
+  }
+
+  @Override
+  public Player getWinner() {
+<span class="nc" id="L89">    return null;</span>
+  }
+
+  @Override
+  public int getTurnNumber() {
+<span class="fc" id="L94">    return Turn;</span>
+  }
+
+  @Override
+  public int getDeckSize(Player who) {
+<span class="nc" id="L99">    return 0;</span>
+  }
+
+  @Override
+  public Card getCardInHand(Player who, int indexInHand) {
+    //Given player is Findus
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">    if(who == Player.FINDUS){</span>
+      //Get Card from IndexInHand
+<span class="fc" id="L107">      return hand.get(indexInHand);</span>
+    } else {
+<span class="nc" id="L109">      return null;</span>
+    }
+}
+
+  @Override
+  public Iterable&lt;? extends Card&gt; getHand(Player who) {
+<span class="nc" id="L115">    return hand;</span>
+  }
+
+  @Override
+  public int getHandSize(Player who) {
+<span class="fc" id="L120">    return 3;</span>
+  } // FAKE-IT
+
+  @Override
+  public Card getCardInField(Player who, int indexInField) {
+    //depending on who is the player, get the field
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">    List&lt;Card&gt; field = (who == Player.FINDUS) ? Findus_Field : Peddersen_Field;</span>
+<span class="fc" id="L127">    return field.get(indexInField);</span>
+  }
+
+  @Override
+  public Iterable&lt;? extends Card&gt; getField(Player who) {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">    List&lt;Card&gt; field = (who == Player.FINDUS) ? Findus_Field : Peddersen_Field;</span>
+<span class="nc" id="L133">    return field;</span>
+  }
+
+  @Override
+  public int getFieldSize(Player who) {
+    //Given player is Findus
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">    if (who == Player.FINDUS){</span>
+<span class="fc" id="L140">      return Findus_Field.size();</span>
+      // Given player is Peddersen
+<span class="nc bnc" id="L142" title="All 2 branches missed.">    } else if  (who == Player.PEDDERSEN);</span>
+<span class="nc" id="L143">    return Peddersen_Field.size();</span>
+    
+  }
+
+  @Override
+  public void endTurn() { 
+<span class="fc" id="L149">    Turn ++;</span>
+<span class="fc" id="L150">  }</span>
+
+  @Override
+  public Status playCard(Player who, Card card, int atIndex) {
+<span class="fc" id="L154">    StandHero hero = (StandHero) getHero(who);</span>
+<span class="fc" id="L155">    hero.ReduceMana(card.getManaCost());</span>
+<span class="fc" id="L156">    Findus_Field.add(card);</span>
+
+<span class="fc" id="L158">    return null;</span>
+  }
+
+  @Override
+  public Status attackCard(Player playerAttacking, Card attackingCard, Card defendingCard) {
+<span class="nc" id="L163">    return null;</span>
+  }
+
+  @Override
+  public Status attackHero(Player playerAttacking, Card attackingCard) {
+<span class="nc" id="L168">    return null;</span>
+  }
+
+  @Override
+  public Status usePower(Player who) {
+<span class="nc" id="L173">    return null;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

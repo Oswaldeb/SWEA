@@ -111,14 +111,103 @@ public class TestAlphaStone {
     assertThat(card2.getAttack(), is(2));
     assertThat(card2.getHealth(), is(2));
   }
+  @Test
+  public void TestIfGetHeroWorksForFindus(){
+    Hero hero = game.getHero(Player.FINDUS);
+    assertThat(hero.getType(), is(GameConstants.BABY_HERO_TYPE));
+    assertThat(hero.getMana(), is(3));
+    assertThat(hero.getHealth(), is(21));
+    assertThat(hero.getOwner(), is(Player.FINDUS));
+    assertThat(hero.getEffectDescription() == "Cute", is(true));
+  }
+
+  @Test
+  public void TestIfGetHeroWorksForPeddersen(){
+    Hero hero = game.getHero(Player.PEDDERSEN);
+    assertThat(hero.getType(), is(GameConstants.BABY_HERO_TYPE));
+    assertThat(hero.getMana(), is(3));
+    assertThat(hero.getHealth(), is(21));
+    assertThat(hero.getOwner(), is(Player.PEDDERSEN));
+    assertThat(hero.getEffectDescription() == "Cute", is(true));
+  }
+  
+
+
+  @Test
+  public void ShouldReduceManaWhenPlayingCard() {
+    // Given a game
+    // When Findus plays Uno
+    Card card1 = game.getCardInHand(Player.FINDUS, 2);
+    game.playCard(Player.FINDUS, card1, 0);
+    // Then Findus should have 2 mana left
+    Hero hero = game.getHero(Player.FINDUS);
+    assertThat(hero.getMana(), is(2));
+
+  }
+
+  @Test
+  public void ShouldNotPlayCardWithInsufficientMana() {
+    // Given a game
+    // When Findus tries to play Dos and tres
+    Card card1 = game.getCardInHand(Player.FINDUS, 1);
+    Card card2 = game.getCardInHand(Player.FINDUS, 0);
+    game.playCard(Player.FINDUS, card1, 0);
+    try {
+      game.playCard(Player.FINDUS, card2, 1);
+      Assertions.fail("Should have thrown exception");
+    } catch (IllegalArgumentException e) {
+      // Then an exception should be thrown
+      assertThat(e.getMessage(), is("Not enough mana"));
+    }
+    
+  }
+  @Test
+  public void CheckCardGetsPlayedToRightIndexOnField(){
+    // Given a game
+    // When Findus plays Uno at index 0
+    Card card1 = game.getCardInHand(Player.FINDUS, 2);
+    game.playCard(Player.FINDUS, card1, 0);
+    // Then Uno should be on the field at index 0
+    assertThat(game.getCardInField(Player.FINDUS, 0).getName(), is(GameConstants.UNO_CARD));
+  }
+
+  @Test
+  public void TestGetFieldSizeBeforePlayingCard(){
+    // Given a game
+    // When Findus has not played any cards
+    // Then field size should be 0
+    assertThat(game.getFieldSize(Player.FINDUS), is(0));
+  }
+
+
+  @Test
+  public void TestGetFieldSizeAfterPlayingCard(){
+    // Given a game
+    // When Findus plays Uno at index 0
+    Card card1 = game.getCardInHand(Player.FINDUS, 2);
+    game.playCard(Player.FINDUS, card1, 0);
+    // Then field size should be 1
+    assertThat(game.getFieldSize(Player.FINDUS), is(1));
+  }
 
   //@Test
-  public void GivenFirstRoundFindusHasHeroTypeBaby(){
-    //Given Player is findus
-    //Then hero should be type baby
-    assertThat(game.getHero(Player.FINDUS), is(GameConstants.BABY_HERO_TYPE));
-  
+  public void ShouldNotPlayCardWithInvalidIndex() {
+    // Given a game
+    // When Findus tries to play Uno and dos at index 0 on field
+    Card card1 = game.getCardInHand(Player.FINDUS, 2);
+    Card card2 = game.getCardInHand(Player.FINDUS, 1);
+    game.playCard(Player.FINDUS, card1, 0);
+    try {
+      game.playCard(Player.FINDUS, card2, 0);
+      Assertions.fail("Should have thrown exception");
+    } catch (IllegalArgumentException e) {
+      // Then an exception should be thrown
+      assertThat(e.getMessage(), is("Can't play two cards in the same index"));
+    }
   }
+
+  //@Test
+
   @Test
   public void TurnNumberWorks(){
     assertThat(game.getTurnNumber(), is(0));
@@ -129,11 +218,11 @@ public class TestAlphaStone {
   }
 
  @Test
- public void ManaFirstRoundIsOne(){
+ public void ManaFirstRoundIs3(){
   //given a game starts
-  Hero hero = new StandHero("Baby", 1, 20, Player.FINDUS);
+  Hero hero = new StandHero("Baby", 3, 20, Player.FINDUS);
   //when 
-  assertThat(hero.getMana(), is(1));
+  assertThat(hero.getMana(), is(3));
  }
   
   //@Test

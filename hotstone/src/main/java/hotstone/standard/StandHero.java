@@ -6,18 +6,27 @@ public class StandHero implements Hero {
     private int mana;
     private int health;
     private Player player;
+    private int currentMana;
 
     public StandHero(String type, int mana, int health, Player player){
         this.type = type;
         this.mana = mana;
         this.health = health;
         this.player = player;
+        this.currentMana = mana;
     }
 
 
     public int getMana(){
-        return mana;
+        return currentMana;
         
+    }
+    public void ReduceMana(int manacost){
+        if (currentMana - manacost >= 0){
+            currentMana -= manacost;
+        } else {
+            throw new IllegalArgumentException("Not enough mana");
+        }
     }
 
     public int getHealth(){
@@ -37,7 +46,7 @@ public class StandHero implements Hero {
     }
 
     public String getEffectDescription(){
-        return null;
+        return "Cute";
     }
     
 }
